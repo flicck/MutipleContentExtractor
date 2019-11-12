@@ -15,9 +15,9 @@ public class ViolenceExtract {
     //正文抽取阀值(单个文本块需要占全文字数的比例，不是总共的)
     private static int SINGLE_EXTRACT_RATIO = 35;
 
-    private static String[] negativeWords = {"责任编辑","责编","本文来源","编辑：","编辑","来源：","本报记者","Rights"};
+    private static String[] negativeWords = {"责任编辑","责编","本文来源","编辑：","编辑","来源：","本报记者","Rights","Copyright"};
 
-    private static int NEGATIVEWORDS_MAXLENGTH = 15;
+    private static int NEGATIVEWORDS_MAXLENGTH = 25;
 
     public static String getText(Document document){
         final String text = document.body().toString();
@@ -111,8 +111,9 @@ public class ViolenceExtract {
         Integer endNum =null;
         Integer startNum = null;
         StringBuilder tmp = new StringBuilder();
-        long currentCount = 0;
+
         for(int i=0;i<newLi.size();i++){
+            long currentCount = 0;
             endNum = newLi.get(i).getKey().endNum;
             startNum = newLi.get(i).getKey().startNum;
             for(int j=startNum;j<=endNum;j++){
